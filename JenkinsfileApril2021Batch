@@ -1,13 +1,13 @@
 node('wallmart-node')
 {
  
- def mavenHome = tool name: "maven3.8.1"
+ def mavenHome = tool name: "maven3.8.4"
  
  properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '5', daysToKeepStr: '', numToKeepStr: '5')), pipelineTriggers([pollSCM('* * * * *')])])
  
  stage('CheckoutCode')
  {
- git branch: 'development', credentialsId: '6773dc34-a3fd-44ec-b1ee-3d2f0aa9f346', url: 'https://github.com/MithunTechnologiesDevOps/maven-web-application.git'
+ git branch: 'development', credentialsId: 'b471f406-61d0-4f61-8edd-c6853483177c', url: 'https://github.com/thejaswarababu/maven-web-application.git'
  }
  
  stage('Build')
@@ -27,8 +27,8 @@ node('wallmart-node')
  
   stage('DeployAppintoTomcatServer')
  {
- sshagent(['017ba0e8-c08f-46e9-94aa-834371229478']) {
- sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@52.64.130.198:/opt/apache-tomcat-9.0.45/webapps/"
+ sshagent(['1c95bd16-734e-4be4-a3ef-b7b1e1c12a44']) {
+    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ec2-user@18.217.188.175:/opt/apache-tomcat-9.0.56/webapps/"
  }
  }
 */
